@@ -5,7 +5,7 @@ const listElement = document.getElementById("list");
 const notes = [
   {
     title: "совершить подвиг",
-    completed: true,
+    completed: false,
   },
   {
     title: "сварить суп",
@@ -40,6 +40,17 @@ createBtn.onclick = function () {
   inputElement.value = "";
 };
 
+listElement.onclick = function (event) {
+  if (event.target.dataset.index) {
+    const index = Number(event.target.dataset.index);
+    const type = event.target.dataset.type;
+
+    if (type === "toggle") {
+      console.log("toggle", index);
+    }
+  }
+};
+
 function getNoteTemplate(note, index) {
   return `
   <li 
@@ -52,10 +63,10 @@ function getNoteTemplate(note, index) {
   <span>
       <span class="btn btn-small btn-${
         note.completed ? "warning" : "success"
-      }" data-index="${index}">&check;</span>
-      <span class="btn btn-small btn-danger">&times;</span>
+      }" data-index="${index}" data-type="toggle">&check;</span>
+      <span class="btn btn-small btn-danger" data-type="remove" >&times;</span>
   </span>
 </li>`;
 }
 
-// 2.25.48
+// 2.39.45
