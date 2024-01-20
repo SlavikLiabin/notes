@@ -1,11 +1,24 @@
-const names = ["Борислав", "Владимир", "Владислав", "Игорь"];
+const people = [
+  {
+    name: "Bob",
+    budget: 4200,
+  },
+  {
+    name: "John",
+    budget: 5428,
+  },
+  {
+    name: "Smith",
+    budget: 25200,
+  },
+  {
+    name: "Barbara",
+    budget: 950,
+  },
+];
 
-const letters = ["g", "a", "c", "d", "t", "A"];
+const str = "Hello, how are you today?";
 
-// console.log("Sort: ", letters);
+const finded = str.split("").reverse().join("");
 
-console.log(
-  letters.sort(function (a, b) {
-    return b.charCodeAt(0) - a.charCodeAt(0);
-  })
-);
+console.log(finded);
