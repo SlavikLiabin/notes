@@ -4,21 +4,24 @@ const listElement = document.getElementById("list");
 
 const notes = [
   {
-    title: "совершить подвиг",
+    title: "разобрать тему с массивами",
     completed: false,
   },
   {
-    title: "сварить суп",
+    title: "определить вектор развития",
     completed: true,
   },
   {
-    title: "сделать хоть что-то",
+    title: "начать делать",
     completed: false,
   },
 ];
 
 function render() {
   listElement.innerHTML = "";
+  if (notes.length === 0) {
+    listElement.innerHTML = "<p>Нет элементов</p>";
+  }
   for (let i = 0; i < notes.length; i++) {
     listElement.insertAdjacentHTML("beforeend", getNoteTemplate(notes[i], i));
   }
@@ -46,8 +49,11 @@ listElement.onclick = function (event) {
     const type = event.target.dataset.type;
 
     if (type === "toggle") {
-      console.log("toggle", index);
+      notes[index].completed = !notes[index].completed;
+    } else if (type === "remove") {
+      notes.splice(index, 1);
     }
+    render();
   }
 };
 
@@ -64,7 +70,7 @@ function getNoteTemplate(note, index) {
       <span class="btn btn-small btn-${
         note.completed ? "warning" : "success"
       }" data-index="${index}" data-type="toggle">&check;</span>
-      <span class="btn btn-small btn-danger" data-type="remove" >&times;</span>
+      <span class="btn btn-small btn-danger" data-index="${index}" data-type="remove" >&times;</span>
   </span>
 </li>`;
 }
